@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+  body {
+    background-color: #121212 !important;
+  }
+  .card-dark {
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
+  .text-primary {
+    color: #00b4ff !important;
+  }
+</style>
+
+<div class="container mt-4">
+
+    <div class="text-center bg-dark text-white p-4 rounded mb-4 shadow">
+        <h1 class="mb-0">
+            Has elegido la película: 
+            <strong class="text-primary">{{ pelicula.title }}</strong>
+        </h1>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <!-- Columna izquierda: Imagen -->
+        <div class="col-md-4 text-center mb-4">
+            {% if pelicula.image %}
+                <img src="{{ pelicula.image.url }}" 
+                     class="img-fluid rounded shadow-lg border border-secondary"
+                     style="max-height: 420px; object-fit: cover;"
+                     alt="{{ pelicula.title }}">
+            {% else %}
+                <div class="text-white-50">No hay imagen disponible</div>
+            {% endif %}
+        </div>
+
+        <!-- Columna derecha: Detalles -->
+        <div class="col-md-6">
+            <div class="card-dark p-4 rounded shadow-lg">
+
+                <h3 class="text-primary mb-3">Detalles de la Película</h3>
+
+                <ul class="list-unstyled fs-5">
+                    <li><strong>Título:</strong> {{ pelicula.title }}</li>
+                    <li><strong>Año de publicación:</strong> {{ pelicula.release_year }}</li>
+                    <li><strong>Director:</strong> {{ pelicula.director_name }}</li>
+                    <li><strong>Género:</strong> {{ pelicula.genre }}</li>
+                </ul>
+
+                <h4 class="text-primary mt-4">Sinopsis</h4>
+                <p class="text-white-75" style="text-align: justify;">
+                    {{ pelicula.synopsis }}
+                </p>
+
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock content %}

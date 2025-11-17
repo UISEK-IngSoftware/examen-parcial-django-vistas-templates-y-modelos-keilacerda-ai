@@ -11,9 +11,4 @@ class Movies(models.Model):
 
     def __str__(self):
         return self.title
-
-### Treiner
-## first_name
-## last_name
-## birth_date **** DataField
-## level **** IntegerField
+    

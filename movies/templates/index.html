@@ -1,29 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <title>Movies</title>
-  </head>
-  <body>
-    <div class="container">
-    <div class="bg-primary text-white p-4 text-center">
-      <h1>Movies</h1>
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    body {
+        background-color: #0d0f1a; /* Fondo oscuro azulado */
+        color: white;
+    }
+
+    .card {
+        background: #1a1d2d;
+        border: 1px solid #6a0dad;
+        border-radius: 12px;
+        box-shadow: 0 0 12px rgba(106, 13, 173, 0.4);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card-title {
+        color: #d2a8ff; /* Morado suave */
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #6a0dad;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #8b12e3;
+    }
+</style>
+
+<p class="p-2">Bienvenidos a las animaciones favoritas de Disney Cinema.</p>
+
+<div class="row">
+  {% for pelicula in peliculas %}
+  <div class="col-xs-12 col-md-6 col-lg-4 mb-4">
+    <div class="card" style="width: 100%">
+
+      {% if pelicula.image %}
+        <img src="{{ pelicula.image.url }}" class="card-img-top" alt="{{ pelicula.title }}" 
+             style="height: 350px; object-fit: cover;">
+      {% endif %}
+
+      <div class="card-body text-center">
+        <h5 class="card-title">{{ pelicula.title }}</h5>
+
+        <a href="{% url 'pelicula_details' pelicula.identification %}" 
+           class="btn btn-primary text-white">
+          Ver más
+        </a>
+      </div>
+
     </div>
-      <p class="p-2">
-        Bienvenido a Movies. Aquí puedes encontrar información sobre diferentes películas.
-      </p>
-      <ul class="list-group">
-        {% for pelicula in peliculas %}
-        <li class="list-group-item">
-          <a href="{% url "pelicula_details" pelicula=pelicula %}">
-            {{ pelicula }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-  </body>
-</html>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
